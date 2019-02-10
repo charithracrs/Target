@@ -5,13 +5,14 @@ route = sys.argv[1]
 stop = sys.argv[2]
 direction = sys.argv[3]
 '''
-
+#Input Arguments
 route = input('Route = ')
 stop = input('Stop = ')
 direction = input('Direction = ')
 
-print(route, stop, direction)
+#print(route, stop, direction)
 
+#URL to find route
 url1 = "http://svc.metrotransit.org/NexTrip/Routes?format=json"
 
 res = urllib.request.urlopen(url1)
@@ -26,6 +27,7 @@ try:
             #print('Route no.=', item['Route'])
             route_num = item['Route']
 
+#URL to find Direction
     url2 = "http://svc.metrotransit.org/NexTrip/Directions/"+route_num+"?format=json"
     res = urllib.request.urlopen(url2)
     data =res.read()
@@ -43,6 +45,7 @@ except:
     sys.exit(1)
     
 try:
+#URL to find Stop
     url3 = "http://svc.metrotransit.org/NexTrip/Stops/"+route_num+"/"+dir_num+"?format=json"
     res = urllib.request.urlopen(url3)
     data =res.read()
@@ -62,6 +65,7 @@ except:
 
 try:
     try:
+#URL to find Next Bus
         url4 = "http://svc.metrotransit.org/NexTrip/"+route_num+"/"+dir_num+"/"+stop_num+"?format=json"
     except:
         print("Stop invalid")
